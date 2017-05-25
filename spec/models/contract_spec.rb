@@ -5,17 +5,17 @@ RSpec.describe Contract, type: :model do
     subject { create(:contract) }
     it { is_expected.to be_valid }
     it { is_expected.to belong_to :client }
-    xit { is_expected.to have_many(:comments) }
-    xit { is_expected.to have_many(:services) }
-    xit { is_expected.to have_many(:productions) }
-    xit { is_expected.to have_many(:ops) }
-    xit { is_expected.to have_many(:spots) }
-    xit { is_expected.to belong_to(:creator).class_name('User') }
-    xit { is_expected.to validate_presence_of(:date) }
-    xit { is_expected.to validate_presence_of(:status) }
-    xit { is_expected.to validate_presence_of(:archiving_status) }
-    xit { is_expected.to validate_presence_of(:renewal_date) }
-    xit { is_expected.to validate_presence_of(:language) }
+    it { is_expected.to have_many(:services).dependent(:destroy) }
+    it { is_expected.to have_many(:productions).through(:services) }
+    it { is_expected.to have_many(:installations).through(:services) }
+    it { is_expected.to have_many(:ops).dependent(:destroy) }
+    it { is_expected.to have_many(:comments).dependent(:destroy) }
+    # xit { is_expected.to belong_to(:creator).class_name('User') }
+    # xit { is_expected.to validate_presence_of(:date) }
+    # xit { is_expected.to validate_presence_of(:status) }
+    # xit { is_expected.to validate_presence_of(:archiving_status) }
+    # xit { is_expected.to validate_presence_of(:renewal_date) }
+    # xit { is_expected.to validate_presence_of(:language) }
 
     # it { should define_enum_for(:status).with(valid_contract_statuses) }
     # it { should define_enum_for(:category).with(valid_contract_categories) }

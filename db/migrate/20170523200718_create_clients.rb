@@ -10,6 +10,10 @@ class CreateClients < ActiveRecord::Migration[5.1]
       t.integer :month_anniversary
       t.date :welcome_letter
       t.string :referrer
+      t.references :category, foreign_key: true
+      t.references :seller, foreign_key: true
+      t.references :captured_by, foreign_key: true
+      t.references :telemarketing, foreign_key: true
 
       t.timestamps
     end

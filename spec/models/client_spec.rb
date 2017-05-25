@@ -4,28 +4,32 @@ RSpec.describe Client, type: :model do
   describe 'validations' do
     subject { create(:client) }
     it { is_expected.to be_valid }
-    it { is_expected.to validate_presence_of(:business_name) }
-    it { is_expected.to validate_presence_of(:legal_name) }
-    it { is_expected.to validate_presence_of(:cnpj) }
-    it { is_expected.to have_many(:contracts) }
-    xit { is_expected.to belong_to :category }
-    xit { is_expected.to belong_to(:seller).class_name('User') }
-    xit { is_expected.to belong_to(:captured_by).class_name('User') }
-    xit { is_expected.to belong_to(:telemarketing).class_name('User') }
-    xit { is_expected.to belong_to(:creator).class_name('User') }
-    xit { is_expected.to have_many(:addresses).dependent(:destroy) }
-    xit { is_expected.to have_many(:contacts) }
-    xit { is_expected.to have_many(:spots).through(:contracts) }
-    xit { is_expected.to have_many(:ops).through(:contracts) }
-    xit { is_expected.to have_many(:productions).through(:ops) }
+    # it { is_expected.to validate_presence_of(:business_name) }
+    # it { is_expected.to validate_presence_of(:legal_name) }
+    # it { is_expected.to validate_presence_of(:cnpj) }
+    it { is_expected.to belong_to :category }
+    it { is_expected.to have_many(:contracts).dependent(:destroy) }
+    it { is_expected.to have_many(:addresses).dependent(:destroy) }
+    it { is_expected.to have_many(:contacts).dependent(:destroy) }
+    it { is_expected.to belong_to(:seller).class_name('User') }
+    it { is_expected.to belong_to(:captured_by).class_name('User') }
+    it { is_expected.to belong_to(:telemarketing).class_name('User') }
+    # xit { is_expected.to belong_to(:creator).class_name('User') }
+    # xit { is_expected.to have_many(:spots).through(:contracts) }
+    # xit { is_expected.to have_many(:ops).through(:contracts) }
+    # xit { is_expected.to have_many(:productions).through(:ops) }
 
-    it 'has #5 contracts' do
-      expect(subject.contracts.count).to eq 5
-    end
+    # it 'has #5 contracts' do
+    #   expect(subject.contracts.count).to eq 5
+    # end
 
-  #   it 'has #3 contacts' do
-  #     expect(subject.contacts.count).to eq 3
-  #   end
+    # it 'has #4 addresses' do
+    #   expect(subject.addresses.count).to eq 4
+    # end
+
+    # it 'has #3 contacts' do
+    #   expect(subject.contacts.count).to eq 3
+    # end
 
   #   context 'cnpj' do
   #     it { is_expected.to validate_presence_of(:cnpj) }

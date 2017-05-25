@@ -6,15 +6,15 @@ class CreateContracts < ActiveRecord::Migration[5.1]
       t.date :renewal_date
       t.date :cancellation_date
       t.text :cancellation_reason
-      t.integer :status
-      t.string :category
+      t.integer :status, default: 0
+      t.integer :category, default: 0
+      t.integer :archiving_status, default: 0
+      t.integer :narrator_type, default: 0
       t.string :pay_method
       t.string :language
-      t.boolean :narrator_type
       t.string :audio_format
       t.integer :tt_prod_contracted
-      t.integer :tt_points_contracted
-      t.integer :archiving_status
+      t.integer :tt_inst_contracted
       t.references :client, foreign_key: true, index: true
 
       t.timestamps
