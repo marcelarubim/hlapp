@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hlapp</title>
+    <title><%= full_title(yield(:title)) %></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="<%= controller_name %> <%= action_name %>">
+    <% flash.each do |message_type, message| %>
+      <div class="text-xs-center alert alert-<%= message_type %>" role='alert'>
+        <%= message %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

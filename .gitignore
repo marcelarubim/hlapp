@@ -29,13 +29,9 @@
 .rspec
 .env
 /vendor/bundle
-# Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
 
-.DS_Store
+/public/system
+
 /db/*.sqlite3
 /db/*.sqlite3-journal
 .rubocop.yml

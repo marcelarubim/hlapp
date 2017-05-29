@@ -1,5 +1,6 @@
 # .nodoc. #
 class Op < ApplicationRecord
+  has_paper_trail
   belongs_to :contract
   belongs_to :solicitant, class_name: 'Contact'
   belongs_to :text_approver, class_name: 'User'

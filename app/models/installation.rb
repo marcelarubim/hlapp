@@ -1,5 +1,6 @@
 # .nodoc. #
 class Installation < ApplicationRecord
+  has_paper_trail
   belongs_to :service
   has_one :contract, through: :service
   has_one :address, as: :addressable, dependent: :destroy

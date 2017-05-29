@@ -42,10 +42,10 @@ RSpec.describe ClientCategory, type: :model do
     # end
   end
 
-  # describe '#display_name' do
+  # describe '#display' do
   #   let(:category) { create(:category, name: 'name', sector: 'sector') }
   #   it 'should show Name - Sector for a category titleize' do
-  #     expect(category.display_name).to eq 'Name - Sector'
+  #     expect(category.display).to eq 'Name - Sector'
   #   end
   # end
 end

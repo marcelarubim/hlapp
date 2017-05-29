@@ -64,6 +64,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
 gem 'jquery-rails'
+gem 'paper_trail'
 
 group :test do
   gem 'database_cleaner', '~> 1.5'
