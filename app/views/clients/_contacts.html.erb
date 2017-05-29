@@ -1,0 +1,42 @@
+<%= f.fields_for :contacts, @client.contacts do |ff|%>
+  <div class="card">
+    <div class="card-header" id="heading-contact-<%= ff.object.id %>">
+      <% if ff.object.persisted? %>
+        <label class="btn btn-danger">
+          <%= ff.check_box :_destroy %>
+        </label>
+      <% end %>
+      <a data-toggle="collapse" href="#collapse-contact-<%= ff.object.id %>" aria-expanded="false" aria-controls="collapse-contact-<%= ff.object.id %>">
+        <small>
+          <%= ff.object.new_record? ? "[new]" : ff.object.fullname.to_s %>
+        </small>
+      </a>
+    </div>
+    <div id="collapse-contact-<%= ff.object.id %>" class="collapse">
+      <div class="card-block">
+        <div class="form-group row">
+          <label class="col-sm-2" for="">Fullname: </label>
+          <div class="col-sm-10"><%= ff.text_field :fullname, placeholder: 'fullname' %></div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2" for="">Telephone: </label>
+          <div class="col-sm-4"><%= ff.telephone_field :telephone, placeholder: 'telephone' %></div>
+          <label class="col-sm-2" for="">Mobile: </label>
+          <div class="col-sm-4"><%= ff.telephone_field :mobile, placeholder: 'mobile' %></div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2" for="">Email: </label>
+          <div class="col-sm-4"><%= ff.email_field :email, placeholder: 'email' %></div>
+          <label class="col-sm-2" for="">Birthday: </label>
+          <div class="col-sm-4"><%= ff.date_field :birthday, placeholder: 'birthday' %></div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2" for="">Position: </label>
+          <div class="col-sm-4"><%= ff.text_field :position, placeholder: 'position' %></div>
+          <label class="col-sm-2" for="">Responsible for: </label>
+          <div class="col-sm-4"><%= ff.text_field :responsible_for, placeholder: 'responsible_for' %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

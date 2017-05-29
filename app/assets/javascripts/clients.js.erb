@@ -1,0 +1,27 @@
+$(".clients.edit").ready(function () {
+  function loadCategoryFilter(el) {
+    const sector = el[el.selectedIndex].value;
+    const cat_name = document.querySelector('select[id="client_category_id"]');
+    const selected = cat_name[cat_name.selectedIndex].value;
+    var url = "/query/clients/categories?sector=" + sector;
+
+    $.get(url, function (data) {
+      $('select[id="client_category_id"]').html(data.map(function (category) {
+        if (category.id == selected) {
+          return '<option selected="selected" value="' + category.id + '">' + category.name + '</option>';
+        }
+        else {
+          return '<option value="' + category.id + '">' + category.name + '</option>';
+        }
+      }).join(''));
+    });
+  }
+
+  const selectEl = document.querySelector('select[id="client_category_sector"]');
+
+  loadCategoryFilter(selectEl);
+
+  $(selectEl).on('change', function () {
+    loadCategoryFilter(this);
+  });
+});

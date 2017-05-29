@@ -1,0 +1,23 @@
+<% provide(:title, 'clients') %>
+<%= render 'nav' %>
+
+<div class='container'>
+  <div class='row'>
+    <div class="col-12">
+      <div class="card-columns">
+        <% @clients.each do |client| %>
+          <div class="card">
+            <div class="card-block">
+              <h4 class="card-title"><%= client.business_name %></h4>
+              <h6 class="card-subtitle mb-2 text-muted"><%= client.cnpj %></h6>
+              <p class="card-text"><%= client.telephone %></p>
+              <p><small><%= client.category.display %></small></p>
+              <a href="<%= client.website %>" class="card-link">website</a>
+              <a href="<%= client_path(client) %>" class="card-link">>></a>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
