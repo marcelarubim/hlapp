@@ -1,0 +1,3 @@
+<%= fields_for "contract[services_attributes][#{@id}]", @contract.services.new do |ff| %>
+  <%= render partial: "service", locals: { ff: ff} %>
+<% end %>

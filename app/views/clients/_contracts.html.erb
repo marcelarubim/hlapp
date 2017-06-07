@@ -1,16 +1,5 @@
 <%= f.fields_for :contracts, @client.contracts do |ff|%>
-  <div class="card">
-    <div class="card-header">
-        <% if ff.object.persisted? %>
-          <label class="btn btn-danger">
-            <%= ff.check_box :_destroy %>
-          </label>
-        <% end %>
-      <a href="<%= ff.object.new_record? ? new_client_contract_path(@client) : contract_path(ff.object) %>" aria-expanded="false" aria-controls="collapse<%= ff.object.id %>">
-        <small>
-          <%= ff.object.new_record? ? "[new]" : ff.object.display %>
-        </small>
-      </a>
-    </div>
+  <div class="card" id="object-contract-<%= ff.object.id || "new" %>">
+    <%= render partial: 'shared/colapse_header', locals: {ff: ff, id: ff.object.id || "new", class_name: 'contract' } %>
   </div>
 <% end %>

@@ -9,11 +9,7 @@
   </head>
 
   <body class="<%= controller_name %> <%= action_name %>">
-    <% flash.each do |message_type, message| %>
-      <div class="text-xs-center alert alert-<%= message_type %>" role='alert'>
-        <%= message %>
-      </div>
-    <% end %>
+    <div id="flash_wrapper"><%= render 'layouts/messages' %></div>
     <%= yield %>
   </body>
 </html>

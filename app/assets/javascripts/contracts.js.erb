@@ -1,0 +1,42 @@
+$(document).on('turbolinks:load', function () {
+  $(".contracts.edit, .contracts.new").ready(function () {
+    function loadSPVFilter(el) {
+      const spvId = el.dataset.id;
+      const target = el.dataset.target;
+      if (!target) return;
+
+      const nextSelect = document
+        .querySelector(`select[data-type="${target}"][data-id="${spvId}"]`);
+      const spvSelected = el.value;
+      let url = null;
+
+      if (target == "product") {
+        url = "/query/services/products?service_type=" + spvSelected;
+      } else if (target == "variation") {
+        const firstSelect = document
+          .querySelector(`select[data-type="service"][data-id="${spvId}"]`).value
+        url = `/query/services/variations?service_type=${firstSelect}&product_type=${spvSelected}`;
+      }
+
+      if (url) {
+        $.get(url, function (data) {
+          $(nextSelect).html(data.map(({ id, name }) =>
+            `<option value="${id}">${name}</option>`
+          ).join(''));
+
+          loadSPVFilter(nextSelect);
+        });
+      }
+    }
+
+    const selectEl = document.querySelectorAll('#service-container select[data-type]');
+
+    Array.from(selectEl).forEach(function (el) {
+      loadSPVFilter(el);
+    });
+
+    $('#service-container').on('change', 'select[data-type]', function () {
+      loadSPVFilter(this);
+    });
+  });
+});

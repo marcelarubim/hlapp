@@ -13,4 +13,16 @@
  */
 
  @import "bootstrap";
- @import "/*";
+ // @import "/*";
+
+ .custom-form {
+  label {
+    @extend .col-form-label;
+    @extend .col-form-label-sm;
+    @extend .text-right;
+  }
+  input, select, textarea {
+    @extend .form-control;
+    @extend .form-control-sm;
+  }
+}

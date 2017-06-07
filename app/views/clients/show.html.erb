@@ -1,0 +1,37 @@
+<% provide(:title, @client.business_name) %>
+
+<%= render 'nav' %>
+
+<div class='container'>
+  <div class='row'>
+    <div class="col-12">
+      <p>ID:
+      <%=@client.id%></p>
+      <p>Business Name:
+      <%=@client.business_name%></p>
+      <p>Legal Name:
+      <%=@client.legal_name%></p>
+      <p>CNPJ:
+      <%=@client.cnpj%></p>
+      <p>Telephone:
+      <%=@client.telephone%></p>
+      <p>Fax:
+      <%=@client.fax%></p>
+      <p>Website:
+      <%=@client.website%></p>
+      <p>Anniversary month:
+      <%=@client.month_anniversary%></p>
+      <p>Welcome letter:
+      <%=@client.welcome_letter%></p>
+      <p>Referrer:
+      <%=@client.referrer%></p>
+      <p>Category:
+      <%=@client.category.sector + ' ' + @client.category.name%></p>
+      <br>
+    </div>
+    <div class="col-12">
+      <%= render partial: 'address', collection: @client.addresses %>
+    </div>
+  </div>
+</div>
+

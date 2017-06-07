@@ -1,0 +1,18 @@
+(function(){
+  const parent = "<%= @parent %>";
+  const query = "<%= params.permit(:child, :path, :partial).to_query %>";
+  const child = "<%= @child %>";
+  const target = "<%= params[:target] || "#{@child}-container" %>"
+  $.ajax({
+    url: `/add?${query}`,
+    success: function(data){
+      const el_to_add = $(data);
+      const targetElement = $(`#${target}`);
+      targetElement.append(el_to_add);
+      targetElement.trigger('object-added');
+    },
+    error: function(data){
+      alert("Sorry, There Was An Error!");
+    }
+  });
+})();

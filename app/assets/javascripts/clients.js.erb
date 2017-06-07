@@ -1,27 +1,44 @@
-$(".clients.edit").ready(function () {
-  function loadCategoryFilter(el) {
-    const sector = el[el.selectedIndex].value;
-    const cat_name = document.querySelector('select[id="client_category_id"]');
-    const selected = cat_name[cat_name.selectedIndex].value;
-    var url = "/query/clients/categories?sector=" + sector;
+$(document).on('turbolinks:load', function () {
+  $(".clients.edit, .clients.new").ready(function () {
+    function loadCategoryFilter(el) {
+      const sector = el[el.selectedIndex].value;
+      const cat_name = document.querySelector('select[id="client_category_id"]');
+      const selected = cat_name.value;
+      var url = "/query/clients/categories?sector=" + sector;
 
-    $.get(url, function (data) {
-      $('select[id="client_category_id"]').html(data.map(function (category) {
-        if (category.id == selected) {
-          return '<option selected="selected" value="' + category.id + '">' + category.name + '</option>';
-        }
-        else {
-          return '<option value="' + category.id + '">' + category.name + '</option>';
-        }
-      }).join(''));
+      $.get(url, function (data) {
+        $('select[id="client_category_id"]').html(data.map(function (category) {
+          if (category.id == selected) {
+            return '<option selected="selected" value="' + category.id + '">' + category.name + '</option>';
+          }
+          else {
+            return '<option value="' + category.id + '">' + category.name + '</option>';
+          }
+        }).join(''));
+      });
+    }
+
+    const selectEl = document.querySelector('select[id="client_category_sector"]');
+
+    loadCategoryFilter(selectEl);
+
+    $(selectEl).on('change', function () {
+      loadCategoryFilter(this);
     });
-  }
 
-  const selectEl = document.querySelector('select[id="client_category_sector"]');
-
-  loadCategoryFilter(selectEl);
-
-  $(selectEl).on('change', function () {
-    loadCategoryFilter(this);
+    $('#new_category').click(function (event) {
+      const sector = $('#client_category_sector');
+      const category = $('#client_category_id');
+      const fieldset = document.getElementById('category_attributes');
+      if (event.target.checked) {
+        sector.attr('disabled', true);
+        category.attr('disabled', true);
+        fieldset.disabled = false;
+      } else {
+        sector.attr('disabled', false);
+        category.attr('disabled', false);
+        fieldset.disabled = true;
+      }
+    });
   });
 });

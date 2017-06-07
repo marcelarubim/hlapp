@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170525151108) do
+ActiveRecord::Schema.define(version: 20170605162916) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "address"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20170525151108) do
     t.string "telephone"
     t.string "fax"
     t.string "website"
-    t.integer "month_anniversary"
+    t.string "month_anniversary"
     t.date "welcome_letter"
     t.string "referrer"
     t.integer "category_id"
@@ -137,7 +137,7 @@ ActiveRecord::Schema.define(version: 20170525151108) do
     t.string "narrator"
     t.string "language"
     t.string "track"
-    t.integer "type"
+    t.integer "kind"
     t.integer "process_phase"
     t.integer "status"
     t.integer "priority"
@@ -206,8 +206,8 @@ ActiveRecord::Schema.define(version: 20170525151108) do
 
   create_table "productions", force: :cascade do |t|
     t.string "theme"
-    t.date "airing_month"
-    t.date "renew_forecast_month"
+    t.string "airing_month"
+    t.string "renew_forecast_month"
     t.string "details"
     t.integer "service_id"
     t.integer "op_id"

@@ -1,12 +1,10 @@
 # .nodoc. #
 class ClientsController < ApplicationController
-  before_action :setup_client, only: [:show, :edit, :update, :destroy]
+  before_action :setup_client, only: [:edit, :update, :destroy]
 
   def index
-    @clients = Client.all.order(:business_name)
+    @clients = Client.all
   end
-
-  def show; end
 
   def new
     @client = Client.new
@@ -14,6 +12,7 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.create(client_params)
+    @client.addresses.update(addressable: @client) # because of polymorphic association
     if @client.save
       redirect_to @client
       flash[:success] = 'Client successfully created'
@@ -23,29 +22,25 @@ class ClientsController < ApplicationController
     end
   end
 
-  def edit
-    @client.addresses.new
-    @client.contacts.new
-    @client.contracts.new
-  end
+  def edit; end
 
   def update
-    # category = Category.where(sector: params[:category_sector],
-                              # name: params[:category_name]).take
-    # @client.category = category
     if @client.update(client_params)
-      redirect_to client_path(@client.id)
+      redirect_to client_path(@client)
       flash[:success] = 'Client successfully updated'
     else
-      render :show
+      render :edit
       flash[:danger] = 'Client not updated'
     end
   end
 
   def destroy
-    return unless @client.destroy
-    redirect_to clients_path
-    flash[:success] = 'Client successfully destroyed'
+    if @client.destroy
+      redirect_to clients_path
+      flash[:success] = 'Client successfully destroyed'
+    else
+      flash[:danger] = 'Client not destroyed'
+    end
   end
 
   private
@@ -57,11 +52,12 @@ class ClientsController < ApplicationController
                                    :seller_id, :captured_by_id, :telemarketing_id,
                                    :category_id,
                                    contracts_attributes: [:id, :_destroy],
-                                   addresses_attributes: add_attributes,
-                                   contacts_attributes: contacts_attributes)
+                                   addresses_attributes: addr_attributes,
+                                   contacts_attributes: contacts_attributes,
+                                   category_attributes: category_attributes)
   end
 
-  def add_attributes
+  def addr_attributes
     [:address, :num, :complement, :district, :city, :state, :zip_code,
      :country, :id, :_destroy]
   end
@@ -69,6 +65,10 @@ class ClientsController < ApplicationController
   def contacts_attributes
     [:fullname, :position, :telephone, :mobile, :email, :birthday,
      :responsible_for, :id, :_destroy]
+  end
+
+  def category_attributes
+    [:sector, :name]
   end
 
   def setup_client

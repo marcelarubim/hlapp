@@ -17,3 +17,14 @@
 //= require turbolinks
 //= require jquery-readyselector
 //= require_tree .
+
+$(document).on('turbolinks:load', function () {
+  $('form').on('click', '#remove-new-object', function(e) {
+    e.preventDefault();
+
+    const id = e.target.dataset.id;
+    const className = e.target.dataset.type;
+    const el = document.querySelector(`#object-${className}-${id}`);
+    el.remove();
+  });
+});

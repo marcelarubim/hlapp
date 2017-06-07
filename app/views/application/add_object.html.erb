@@ -1,0 +1,3 @@
+<%= fields_for @path, Object.const_get(@child.classify).new do |ff| %>
+  <%= render partial: "#{params[:partial]}", locals: { ff: ff} %>
+<% end %>

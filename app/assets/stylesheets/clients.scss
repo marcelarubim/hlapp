@@ -1,15 +1,3 @@
 // Place all the styles related to the Clients controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-.client-form {
-  label {
-    @extend .col-form-label;
-    @extend .col-form-label-sm;
-    @extend .text-right;
-  }
-  input, select, textarea {
-    @extend .form-control;
-    @extend .form-control-sm;
-  }
-}

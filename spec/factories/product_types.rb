@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :product_type do
-    name { Faker::Name.unique }
+    name { Faker::Food.unique.ingredient }
   end
 end

@@ -1,18 +1,6 @@
-<%= f.fields_for :addresses, @client.addresses do |ff| %>
-<div class="card">
-  <div class="card-header" id="heading-add-<%= ff.object.id %>">
-    <% if ff.object.persisted? %>
-      <label class="btn btn-danger">
-        <%= ff.check_box :_destroy %>
-      </label>
-    <% end %>
-    <a data-toggle="collapse" href="#collapse-add-<%= ff.object.id %>" aria-expanded="false" aria-controls="collapse-add-<%= ff.object.id %>">
-      <small>
-        <%= ff.object.new_record? ? "[new]" : ff.object.complete_address %>
-      </small>
-    </a>
-  </div>
-  <div id="collapse-add-<%= ff.object.id %>" class="collapse">
+<div class="card" id="object-address-<%= @id || ff.object.id %>">
+  <%= render partial: 'shared/colapse_header', locals: {ff: ff, id: @id || ff.object.id, class_name: 'address' } %>
+  <div id="collapse-address-<%= @id || ff.object.id %>" class="collapse <%= "show" if ff.object.new_record? %>">
     <div class="card-block">
       <div class="form-group row">
         <label class="col-sm-2" for="">Address: </label>
@@ -43,4 +31,3 @@
     </div>
   </div>
 </div>
-<% end %>

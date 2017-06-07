@@ -5,10 +5,10 @@ FactoryGirl.define do
     narrator { Faker::Name.first_name + ' ' + Faker::Name.last_name }
     language { Faker::Color.color_name }
     track { Faker::Color.color_name }
-    type { Faker::Number.between(0, 8) }
-    process_phase { Faker::Number.between(0, 2) }
+    kind { Faker::Number.between(0, 14) }
+    process_phase { Faker::Number.between(0, 16) }
     status { Faker::Number.between(0, 2) }
-    priority { Faker::Number.between(0, 3) }
+    priority { Faker::Number.between(0, 1) }
     briefing_date { Faker::Date.between(10.days.ago, Date.today) }
     max_delivery_date { briefing_date + 20 }
     text_delivery_date { briefing_date + rand(2..5) }

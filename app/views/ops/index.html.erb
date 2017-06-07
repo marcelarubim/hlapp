@@ -1,0 +1,30 @@
+<% provide(:title, 'ops') %>
+<%= render 'shared/nav' %>
+
+<div class='container'>
+  <div class="row">
+    <h6><%= @contract.client.business_name %></h6>
+  </div>
+  <div class='row'>
+  <p><%= @contract.date %></p>
+  </div>
+  <div class='row'>
+    <div class="col-sm-12">
+      <div class="card-deck">
+        <% @ops.each do |op| %>
+          <div class="card">
+            <div class="card-block">
+              <h4 class="card-title"><%= op.id %></h4>
+              <h6 class="card-subtitle mb-2 text-muted"><%= op.max_delivery_date %></h6>
+              <p class="card-text"><%= op.priority %></p>
+              <a href="<%= op_path(op) %>" class="card-link">>></a>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Last updated <%= time_ago_in_words(op.updated_at, include_seconds: true) %></small>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

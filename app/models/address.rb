@@ -4,7 +4,7 @@ class Address < ApplicationRecord
   default_scope { order(address: :asc) }
   belongs_to :addressable, polymorphic: true
 
-  def complete_address
+  def display
     if complement
       "#{address}, #{num}, #{complement}, #{city}/#{state}"
     else

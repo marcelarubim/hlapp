@@ -1,10 +1,10 @@
 <% provide(:title, 'clients') %>
-<%= render 'nav' %>
+<%= render 'shared/nav' %>
 
 <div class='container'>
   <div class='row'>
-    <div class="col-12">
-      <div class="card-columns">
+    <div class="col-sm-12">
+      <div class="card-deck">
         <% @clients.each do |client| %>
           <div class="card">
             <div class="card-block">
@@ -14,6 +14,9 @@
               <p><small><%= client.category.display %></small></p>
               <a href="<%= client.website %>" class="card-link">website</a>
               <a href="<%= client_path(client) %>" class="card-link">>></a>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Last updated <%= time_ago_in_words(client.updated_at, include_seconds: true) %></small>
             </div>
           </div>
         <% end %>

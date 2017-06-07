@@ -1,0 +1,54 @@
+<%= form_for @contract.new_record? ? [@contract.client, @contract]: [@contract], remote: true, html: {class: 'custom-form'} do |f| %>
+  <% if @contract.errors.any? %>
+  <ul>
+    <% @contract.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+  <% end %>
+
+  <div class="form-group row">
+    <label class="col-sm-2" for="contract_date">Date: </label>
+    <div class="col-sm-2"><%= f.date_field :date, placeholder: @contract.date %></div>
+    <label class="col-sm-2" for="contract_old_num">Old Number: </label>
+    <div class="col-sm-2"><%= f.number_field :old_num, placeholder: @contract.old_num %></div>
+    <label class="col-sm-2" for="contract_status">Status: </label>
+    <div class="col-sm-2"><%= f.select :status, Contract.statuses.keys.map {|c| [c.titleize,c]}, selected: @contract.status %></div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2" for="contract_category">Category: </label>
+    <div class="col-sm-4"><%= f.select :category, Contract.categories.keys.map {|c| [c.titleize,c]}, selected: @contract.category %></div>
+    <label class="col-sm-2" for="contract_pay_method">Pay method: </label>
+    <div class="col-sm-4"><%= f.text_field :pay_method, placeholder: @contract.pay_method %></div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2" for="contract_narrator_type">Narrator type: </label>
+    <div class="col-sm-2"><%= f.select :narrator_type, Contract.narrator_types.keys.map {|c| [c.titleize,c]}, selected: @contract.narrator_type %></div>
+    <label class="col-sm-2" for="contract_archiving_status">Archiving status: </label>
+    <div class="col-sm-2"><%= f.select :archiving_status, Contract.archiving_statuses.keys.map {|c| [c.titleize,c]}, selected: @contract.archiving_status %></div>
+    <label class="col-sm-2" for="contract_renewal_date">Renewal date: </label>
+    <div class="col-sm-2"><%= f.date_field :renewal_date, placeholder: @contract.renewal_date %></div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2" for="contract_language">Language: </label>
+    <div class="col-sm-4"><%= f.text_field :language, placeholder: @contract.language %></div>
+    <label class="col-sm-2" for="contract_audio_format">Audio format: </label>
+    <div class="col-sm-4"><%= f.text_field :audio_format, placeholder: @contract.audio_format %></div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2" for="contract_tt_prod_contracted">TT Prod. Contracted: </label>
+    <div class="col-sm-2"><%= f.number_field :tt_prod_contracted, placeholder: @contract.tt_prod_contracted %></div>
+    <label class="col-sm-2" for="contract_tt_inst_contracted">TT Instal. Contracted: </label>
+    <div class="col-sm-2"><%= f.number_field :tt_inst_contracted, placeholder: @contract.tt_inst_contracted %></div>
+  </div>
+  <p class="mt-3">Services:</p>
+  <div id="service-container">
+    <%= f.fields_for :services, @contract.services do |ff| %>
+      <%= render partial: "services", locals: {ff: ff} %>
+    <% end %>
+  </div>
+  <%= link_to_add_fields("New services", f, 'services') %>
+
+  <div class="mt-3"></div>
+  <%= f.submit 'Save', class: 'btn btn-primary px-0' %>
+<% end %>
