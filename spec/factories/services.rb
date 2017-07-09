@@ -4,7 +4,8 @@ FactoryGirl.define do
       service.spv = if ServiceProductVariation.count.zero?
                       create(:service_product_variation)
                     else
-                      ServiceProductVariation.find(rand(1..ServiceProductVariation.count))
+                      ServiceProductVariation.find(ServiceProductVariation
+                                                   .pluck(:id).sample)
                     end
     end
     contract

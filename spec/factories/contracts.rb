@@ -1,7 +1,10 @@
 FactoryGirl.define do
   factory :contract do
     client
-    status { rand(0..5) }
+    status { Contract.statuses.keys.sample }
+    category { Contract.categories.keys.sample }
+    archiving_status { Contract.archiving_statuses.keys.sample }
+    narrator_type { Contract.narrator_types.keys.sample }
     pay_method { Faker::Food.ingredient }
     date { Date.today - rand(0..5) }
     renewal_date { Date.today + 1.year }

@@ -12,17 +12,11 @@ class Contract < ApplicationRecord
   accepts_nested_attributes_for :services, allow_destroy: true, reject_if: :all_blank
                                 # proc { |attributes| attributes['courtesy'].blank? }
 
-  STATUS_OPT = [:ativo, :eventual, :desistente, :pendente, :inadimplente, :renegociacao,
-                :cancelamento, :cancelado].freeze
-  CATEGORIES_OPT = [:locacao, :temporario, :venda, :parceria, :permuta, :manutencao]
-                   .freeze
-  ARCH_STATUS_OPT = [:archieved, :only_client, :copy].freeze
-  NARRATOR_OPT = [:not_defined, :default, :special].freeze
-
-  enum status: STATUS_OPT
-  enum category: CATEGORIES_OPT
-  enum archiving_status: ARCH_STATUS_OPT
-  enum narrator_type: NARRATOR_OPT
+  enum status: [:ativo, :eventual, :desistente, :pendente, :inadimplente, :renegociacao,
+                :cancelamento, :cancelado]
+  enum category: [:locacao, :temporario, :venda, :parceria, :permuta, :manutencao]
+  enum archiving_status: [:archieved, :only_client, :copy]
+  enum narrator_type: [:not_defined, :default, :special]
 
   def display
     "Category: #{category.display}\tDate: #{date}\tStatus: #{status}"
