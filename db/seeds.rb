@@ -1,11 +1,10 @@
-# User.create(fullname: 'Admin User',
-#             cpf: '00000000000',
-#             email: 'admin@admin.com',
-#             password: 'password',
-#             password_confirmation: 'password',
-#             role: 'admin')
 [:admin, :production, :technic, :seller].each do |role|
-  FactoryGirl.create(:user, role: role, password: 'password')
+  if role == :admin
+    FactoryGirl.create(:user, role: role, fullname: 'Admin User', cpf: '00000000000',
+                              password: 'password')
+  else
+    FactoryGirl.create(:user, role: role, password: 'password')
+  end
 end
 
 FactoryGirl.create_list(:client_category, 5)
@@ -17,6 +16,7 @@ FactoryGirl.create_list(:client, 15,
 Client.all.each do |c|
   FactoryGirl.create_list(:contact, rand(2..5), client: c)
   FactoryGirl.create_list(:contract, rand(1..3), client: c)
+  FactoryGirl.create_list(:address, rand(1..2), addressable: c)
 end
 
 {
@@ -64,8 +64,10 @@ end
 end
 
 Contract.all.each do |c|
-  FactoryGirl.create_list(:production, rand(1..3), contract: c)
   s = ServiceProductVariation.find(ServiceProductVariation.pluck(:id).sample)
   FactoryGirl.create_list(:service, rand(1..4), contract: c, spv: s)
   FactoryGirl.create_list(:op, c.services.count, contract: c)
+  c.services.each do |serv|
+    FactoryGirl.create_list(:production, rand(1..3), service: serv, op: c.ops.sample)
+  end
 end
