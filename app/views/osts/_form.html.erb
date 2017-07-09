@@ -1,0 +1,55 @@
+<%= form_for @ost.new_record? ? [@installation, @ost] : [@ost], remote: true, html: {class: 'custom-form'} do |f| %>
+  <%= render partial: 'shared/form_errors', locals: { object: @ost } %>
+
+  <div class="form-group row">
+    <label class="col-sm-2" for="">Status: </label>
+    <div class="col-sm-4"><%= f.select :status, Ost.statuses.keys.map {|c| [c.titleize,c]}, selected: @ost.status, include_blank: true %></div>
+    <label class="col-sm-2" for="">Type: </label>
+    <div class="col-sm-4"><%= f.select :type, Ost.types.keys.map {|c| [c.titleize,c]}, selected: @ost.type, include_blank: true %></div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2" for="">Service Method: </label>
+    <div class="col-sm-4"><%= f.select :service_method, Ost.service_methods.keys.map {|c| [c.titleize,c]}, selected: @ost.service_method, include_blank: true %></div>
+    <label class="col-sm-2" for="">Repair Status: </label>
+    <div class="col-sm-4"><%= f.select :repair_status, Ost.repair_statuses.keys.map {|c| [c.titleize,c]}, selected: @ost.repair_status, include_blank: true %></div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2" for="">Complain: </label>
+    <div class="col-sm-4"><%= f.text_area :complain, placeholder: @ost.complain %></div>
+    <label class="col-sm-2" for="">Defects: </label>
+    <div class="col-sm-4"><%= f.text_area :defects, placeholder: @ost.defects %></div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2" for="">Equipment replaced: </label>
+    <div class="col-sm-4"><%= f.select :equip_replaced, { No: 0, Yes: 1}, selected: @ost.equip_replaced, include_blank: true %></div>
+    <label class="col-sm-2" for="">Quality Control date: </label>
+    <div class="col-sm-4"><%= f.date_field :qc_date, placeholder: @ost.qc_date %></div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2" for="">Programation Date: </label>
+    <div class="col-sm-4"><%= f.date_field :program_date, placeholder: @ost.program_date %></div>
+    <label class="col-sm-2" for="">Service execution date: </label>
+    <div class="col-sm-4"><%= f.date_field :service_execution_date, placeholder: @ost.service_execution_date %></div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2" for="">Equipment replaced: </label>
+    <div class="col-sm-4"><%= f.number_field :installed_qty, placeholder: @ost.installed_qty %></div>
+    <label class="col-sm-2" for="">Equipment collected: </label>
+    <div class="col-sm-4"><%= f.number_field :collected_qty, placeholder: @ost.collected_qty %></div>
+  </div>
+
+  <div class="mt-3"></div>
+  <%= f.submit 'Save', class: 'btn btn-primary px-0' %>
+
+  <%= render "flows" %>
+
+  <p class="mt-3">OST flow:</p>
+  <div id="ost-flow-container">
+    <%= f.fields_for :ost_flows, @op.ost_flows do |ff| %>
+      <%= render partial: "ost_flows", locals: {ff: ff} %>
+    <% end %>
+  </div>
+  <%= link_to_add_fields("New address", f, 'addresses') %>
+
+<% end %>

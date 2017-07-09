@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   get 'contracts/:id', to: 'contracts#edit'
   get 'ops/:id', to: 'ops#edit'
   get 'installations/:id', to: 'installations#edit'
+  scope 'installations/:installation_id' do
+    resources :osts, except: [:show, :edit]
+    get 'osts/:id', to: 'osts#edit'
+  end
   get 'add', to: 'application#add_object', as: 'add_object'
   delete ':class_name/:id', to: 'application#destroy_object', as: 'destroy_object'
   scope :query do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170605162916) do
+ActiveRecord::Schema.define(version: 20170709104437) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "address"
@@ -113,10 +113,6 @@ ActiveRecord::Schema.define(version: 20170605162916) do
     t.integer "guarantee_type"
     t.date "delivery_date"
     t.date "guarantee_limit"
-    t.integer "active"
-    t.integer "inactive"
-    t.integer "to_collect"
-    t.integer "registered"
     t.integer "service_id"
     t.integer "responsible_id"
     t.datetime "created_at", null: false
@@ -178,14 +174,13 @@ ActiveRecord::Schema.define(version: 20170605162916) do
     t.integer "type"
     t.date "program_date"
     t.date "service_execution_date"
-    t.date "cquality_date"
+    t.date "qc_date"
     t.integer "service_method"
-    t.string "solicitant"
     t.string "complain"
     t.string "defects"
     t.integer "repair_status"
     t.boolean "equip_replaced"
-    t.integer "intalled_qty"
+    t.integer "installed_qty"
     t.integer "collected_qty"
     t.integer "product_evaluation"
     t.integer "installation_id"

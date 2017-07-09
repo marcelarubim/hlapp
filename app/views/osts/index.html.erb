@@ -1,0 +1,30 @@
+<% provide(:title, 'OSTs') %>
+<%= render 'shared/nav' %>
+
+<div class='container'>
+  <div class="row">
+    <h6><%= @installation.contract.client.business_name %></h6>
+  </div>
+  <div class='row'>
+    <p><%= @installation.code %></p>
+  </div>
+  <div class='row'>
+    <div class="col-sm-12">
+      <div class="card-deck">
+        <% @osts.each do |ost| %>
+          <div class="card">
+            <div class="card-block">
+              <h4 class="card-title"><%= ost.id %></h4>
+              <h6 class="card-subtitle mb-2 text-muted"><%= ost.status %></h6>
+              <p class="card-text"><%= ost.type %></p>
+              <a href="<%= ost_path(@installation, ost) %>" class="card-link">>></a>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Last updated <%= time_ago_in_words(ost.updated_at, include_seconds: true) %></small>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
