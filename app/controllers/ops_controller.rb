@@ -25,8 +25,7 @@ class OpsController < ApplicationController
   def edit; end
 
   def update
-    productions = Production.where(id: params[:productions_attributes][:id])
-    puts productions
+    update_productions
     if @op.update(op_params)
       redirect_to op_path(@op)
       flash[:success] = 'OP successfully updated'
@@ -53,6 +52,12 @@ class OpsController < ApplicationController
                                :demo_delivery_date, :demo_approving_date,
                                :studio_release_date, :contract_id, :solicitant_id,
                                :text_approver_id, :comun_executor_id, :studio_executor_id,
-                               :editor_id, :production_ids[])
+                               :editor_id, :production_ids)
+  end
+
+  def update_productions
+    @op.productions << Production.where(id: params[:op][:production_ids])
+    to_delete = @op.productions.where.not(id: params[:op][:production_ids])
+    @op.productions.delete(to_delete)
   end
 end

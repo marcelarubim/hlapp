@@ -61,12 +61,16 @@
   </div>
   <p class="mt-3">Production:</p>
   <div id="production-container">
-    <% @op.contract.productions.each do |prod| %>
-      <%= f.hidden_field :production_ids[], :multiple => true, :value => prod.id %>
+    <% @op.contract.productions.available(@op.id).each do |prod| %>
+      <div class="col-sm-12">
+        <div class="form-check">
+          <label class="form-check-label">
+            <%= f.check_box :production_ids, {multiple: true, class: "form-check-input", type: "checkbox" }, prod.id, nil  %>
+            <%= prod.theme %>
+          </label>
+        </div>
+      </div>
     <% end %>
-  </div>
-  <div id="op_id" data-target="<%= @op.id %>">
-    <%= link_to_add_fields("New production", f, 'productions') %>
   </div>
 
   <div class="mt-3"></div>
