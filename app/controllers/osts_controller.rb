@@ -49,10 +49,10 @@ class OstsController < ApplicationController
           .permit(:status, :type, :program_date, :service_execution_date, :qc_date,
                   :service_method, :complain, :defects, :repair_status, :equip_replaced,
                   :installed_qty, :collected_qty, :product_evaluation, :installation_id,
-                  :executor_id, :attendant_id, flow_attributes: flow_attributes)
+                  :executor_id, :attendant_id, flux_attributes: flux_attributes)
   end
 
-  def flow_attributes
+  def flux_attributes
     [:notes, :ost_id, :id, :_destroy]
   end
 end

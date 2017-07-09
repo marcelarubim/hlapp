@@ -8,7 +8,7 @@ class Op < ApplicationRecord
   belongs_to :studio_executor, class_name: 'User'
   belongs_to :editor, class_name: 'User'
   has_many :productions
-  has_many :op_flows, dependent: :destroy
+  has_many :fluxes, as: :fluxable, dependent: :destroy
 
   enum kind: [:implantacao, :anual, :adicional, :ponto_adicional, :antecipa_anual,
               :atualizacao, :migracao, :extra_contrato, :venda, :loc_temporaria,

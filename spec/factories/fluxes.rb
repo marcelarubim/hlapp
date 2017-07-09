@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :ost_flow do
-    ost
+  factory :flux do
+    
   end
 end

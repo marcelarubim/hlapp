@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170709104437) do
+ActiveRecord::Schema.define(version: 20170709115352) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "address"
@@ -102,6 +102,15 @@ ActiveRecord::Schema.define(version: 20170709104437) do
     t.index ["client_id"], name: "index_contracts_on_client_id"
   end
 
+  create_table "fluxes", force: :cascade do |t|
+    t.text "notes"
+    t.integer "fluxable_id"
+    t.string "fluxable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fluxable_type", "fluxable_id"], name: "index_fluxes_on_fluxable_type_and_fluxable_id"
+  end
+
   create_table "installations", force: :cascade do |t|
     t.string "code"
     t.string "language"
@@ -119,14 +128,6 @@ ActiveRecord::Schema.define(version: 20170709104437) do
     t.datetime "updated_at", null: false
     t.index ["responsible_id"], name: "index_installations_on_responsible_id"
     t.index ["service_id"], name: "index_installations_on_service_id"
-  end
-
-  create_table "op_flows", force: :cascade do |t|
-    t.text "notes"
-    t.integer "op_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["op_id"], name: "index_op_flows_on_op_id"
   end
 
   create_table "ops", force: :cascade do |t|
@@ -159,14 +160,6 @@ ActiveRecord::Schema.define(version: 20170709104437) do
     t.index ["solicitant_id"], name: "index_ops_on_solicitant_id"
     t.index ["studio_executor_id"], name: "index_ops_on_studio_executor_id"
     t.index ["text_approver_id"], name: "index_ops_on_text_approver_id"
-  end
-
-  create_table "ost_flows", force: :cascade do |t|
-    t.text "notes"
-    t.integer "ost_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["ost_id"], name: "index_ost_flows_on_ost_id"
   end
 
   create_table "osts", force: :cascade do |t|
