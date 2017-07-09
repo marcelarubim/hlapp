@@ -2,7 +2,7 @@
 class ServiceProductVariation < ApplicationRecord
   belongs_to :service_type
   belongs_to :product_type
-  belongs_to :variation_type
+  belongs_to :variation_type, optional: true
 
   def display
     "#{service_type.name.titleize} - #{product_type.name.titleize} -
