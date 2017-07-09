@@ -12,7 +12,6 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.create(client_params)
-    @client.addresses.update(addressable: @client) # because of polymorphic association
     if @client.save
       redirect_to @client
       flash[:success] = 'Client successfully created'
@@ -59,7 +58,7 @@ class ClientsController < ApplicationController
 
   def addr_attributes
     [:address, :num, :complement, :district, :city, :state, :zip_code,
-     :country, :id, :_destroy]
+     :country, :addressable, :id, :_destroy]
   end
 
   def contacts_attributes
