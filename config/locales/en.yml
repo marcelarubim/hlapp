@@ -31,3 +31,10 @@
 
 en:
   hello: "Hello world"
+
+  faker:
+    hl:
+      service: [Anunciador, Espera Telefonica, Radio, Fraseologia, Jingle, Spot, Trilha, Audio Off, Telemensagem]
+      product: [Arquivo Audio, Atendedor, DP, Pendrive, Holdcast, Holdline Pro]
+      variation: [Diurno, Noturno, Recesso, Mudanca Telefone, Secretaria, HC-12, HC-20, HC-TICKER, Empresarial, Ambiente, DP4, DP10]
+
