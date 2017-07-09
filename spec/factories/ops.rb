@@ -1,10 +1,10 @@
 FactoryGirl.define do
   factory :op do
     contract
-    solicitant { contract.client.contacts.first }
+    solicitant { contract.client.contacts.sample }
     narrator { Faker::Name.first_name + ' ' + Faker::Name.last_name }
     language { Faker::Color.color_name }
-    track { Faker::Color.color_name }
+    track { Faker::Color.color_name + ' ' + Faker::Name.last_name }
     kind { Op.kinds.keys.sample }
     process_phase { Op.process_phases.keys.sample }
     status { Op.statuses.keys.sample }
@@ -17,10 +17,10 @@ FactoryGirl.define do
     demo_delivery_date { recording_date + rand(2..5) }
     demo_approving_date { demo_delivery_date + rand(2..5) }
     studio_release_date { demo_approving_date + rand(2..5) }
-    association :text_approver, factory: :user, strategy: :build
-    association :comun_executor, factory: :user, strategy: :build
-    association :studio_executor, factory: :user, strategy: :build
-    association :editor, factory: :user, strategy: :build
+    studio_executor { User.all.sample }
+    comun_executor { User.all.sample }
+    editor { User.all.sample }
+    text_approver { User.all.sample }
     # association :creator, factory: :user, strategy: :build
   end
 end

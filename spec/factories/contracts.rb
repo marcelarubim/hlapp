@@ -6,11 +6,11 @@ FactoryGirl.define do
     archiving_status { Contract.archiving_statuses.keys.sample }
     narrator_type { Contract.narrator_types.keys.sample }
     pay_method { Faker::Food.ingredient }
-    date { Date.today - rand(0..5) }
-    renewal_date { Date.today + 1.year }
+    date { Faker::Date.between(70.months.ago, 1.day.ago) }
+    renewal_date { Faker::Date.between(Date.today + 180, 1.year.from_now) }
     language { Faker::Color.color_name }
     audio_format { Faker::File.extension }
-    tt_prod_contracted { Faker::Number.between(1, 2) }
-    tt_inst_contracted { Faker::Number.between(1, 2) }
+    tt_prod_contracted { rand(1..10) }
+    tt_inst_contracted { rand(0..20) }
   end
 end
