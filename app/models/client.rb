@@ -13,5 +13,5 @@ class Client < ApplicationRecord
   accepts_nested_attributes_for :addresses, :contacts, :contracts, :category,
                                 allow_destroy: true, reject_if: :all_blank
 
-  # validates_presence_of :business_name, :legal_name, :cnpj
+  validates_presence_of :business_name, :legal_name, :cnpj
 end

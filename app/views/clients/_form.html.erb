@@ -1,11 +1,5 @@
 <%= form_for @client, html: {class: 'custom-form'} do |f| %>
-  <% if @client.errors.any? %>
-  <ul>
-    <% @client.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-  <% end %>
+  <%= render partial: 'shared/form_errors', locals: { object: @client } %>
 
   <div class="form-group row">
     <label class="col-sm-2" for="client_business_name">Business Name: </label>
