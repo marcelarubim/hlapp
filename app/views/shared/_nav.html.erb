@@ -4,12 +4,20 @@
   <% if  params[:controller] == 'contracts'%>
     <%= link_to 'Client', client_path(@contract.client), class:"nav-link"  %>
     <%= link_to 'OPs', contract_ops_path(@contract), class:"nav-link"  %>
+    <%= link_to 'Installations', contract_installations_path(@contract), class:"nav-link"  %>
   <% end %>
   <% if  params[:controller] == 'ops' %>
     <% if  params[:action] == 'index' %>
       <%= link_to 'New OP', new_contract_op_path(@contract), class:"nav-link"  %>
     <% else %>
       <%= link_to 'Contract', contract_path(@op.contract || @contract), class:"nav-link"  %>
+    <% end %>
+  <% end %>
+  <% if  params[:controller] == 'installations' %>
+    <% if  params[:action] == 'index' %>
+      <%= link_to 'New installation', new_contract_installation_path(@contract), class:"nav-link"  %>
+    <% else %>
+      <%= link_to 'Contract', contract_path(@installation.contract || @contract), class:"nav-link"  %>
     <% end %>
   <% end %>
 </nav>
