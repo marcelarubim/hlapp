@@ -10,6 +10,7 @@
           <a href="#" class='btn btn-secondary' role='button'>Reports</a>
           <a href="#" class='btn btn-secondary' role='button'>Categories</a>
         <%= link_to_if(@user.role == 'admin', 'Users', { controller: "admin/users", action: "index" }, class:'btn btn-secondary', role:'button'){} %>
+         <%= link_to "Log out", logout_path, method: "delete", class: "btn btn-secondary", role: 'button'%>
       <% end %>
     </div>
   </div>

@@ -31,14 +31,22 @@ class UsersController < ApplicationController
   end
 
   def authentication
+    result = password_authentication(params[:current_password], params[:user][:password],
+                                     params[:user][:password_confirmation])
+    result
+  end
+
+  def password_authentication(current_pass, new_pass, pass_confirmation)
     return false, :danger, 'The current password is incorrect' unless
-      User.find(current_user.id).try(:authenticate, params[:current_password]).present?
+      User.find(current_user.id).try(:authenticate, current_pass).present?
     return false, :danger, 'New password has to be different from the current password' if
-      params[:current_password] == params[:user][:password]
+      current_pass == new_pass
     return false, :danger, 'Password confirmation doesnt match new password' if
-      params[:user][:password] != params[:user][:password_confirmation]
+      new_pass != pass_confirmation
     return false, :danger, 'New password is invalid (min 6 characteres)' unless
       @user.update_attributes(user_params)
+    return true, :danger, 'Password not updated' if new_pass.blank? &&
+                                                    pass_confirmation.blank?
     log_in @user
     [true, :success, 'Password updated with success!']
   end

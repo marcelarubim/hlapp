@@ -1,5 +1,5 @@
-[:admin, :production, :technic, :seller].each do |role|
-  if role == :admin
+%w(admin production technic seller).each do |role|
+  if role == 'admin'
     FactoryGirl.create(:user, role: role, fullname: 'Admin User', cpf: '00000000000',
                               password: 'password')
   else
