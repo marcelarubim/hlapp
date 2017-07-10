@@ -15,7 +15,13 @@ class FilterController < ApplicationController
   def service_variations
     sel = ServiceProductVariation.where(service_type_id: params[:service_type],
                                         product_type_id: params[:product_type])
-    sel = sel.map { |x| { id: x.id, name: VariationType.find(x.variation_type_id).name } }
+    sel = sel.map do |x|
+      if x.variation_type_id.nil?
+        { id: x.id, name: '' }
+      else
+        { id: x.id, name: VariationType.find(x.variation_type_id).name }
+      end
+    end
     render json: sel
   end
 
