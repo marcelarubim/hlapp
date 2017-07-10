@@ -1,0 +1,11 @@
+<div class="card" id="object-flux-<%= @id || ff.object.id %>">
+  <%= render partial: 'shared/colapse_header', locals: {ff: ff, id: @id || ff.object.id, class_name: 'flux' } %>
+  <div id="collapse-flux-<%= @id || ff.object.id %>" class="collapse <%= "show" if ff.object.new_record? %>">
+    <div class="card-block">
+      <div class="form-group row">
+        <label class="col-sm-2" for="">Comment: </label>
+        <div class="col-sm-10"><%= ff.text_area :notes, placeholder: 'comment' %></div>
+      </div>
+    </div>
+  </div>
+</div>

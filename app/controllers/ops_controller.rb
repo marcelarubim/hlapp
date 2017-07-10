@@ -52,12 +52,17 @@ class OpsController < ApplicationController
                                :demo_delivery_date, :demo_approving_date,
                                :studio_release_date, :contract_id, :solicitant_id,
                                :text_approver_id, :comun_executor_id, :studio_executor_id,
-                               :editor_id, :production_ids)
+                               :editor_id, :production_ids,
+                               fluxes_attributes: fluxes_attributes)
   end
 
   def update_productions
     @op.productions << Production.where(id: params[:op][:production_ids])
     to_delete = @op.productions.where.not(id: params[:op][:production_ids])
     @op.productions.delete(to_delete)
+  end
+
+  def fluxes_attributes
+    [:notes, :fluxable, :id, :_destroy]
   end
 end

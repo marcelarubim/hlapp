@@ -75,4 +75,13 @@
 
   <div class="mt-3"></div>
   <%= f.submit 'Save', class: 'btn btn-primary px-0' %>
+
+  <p class="mt-3">Fluxes:</p>
+  <div id="flux-container">
+    <%= f.fields_for :fluxes, @op.fluxes do |ff| %>
+      <%= render partial: "fluxes", locals: {ff: ff} %>
+    <% end %>
+  </div>
+
+  <%= link_to_add_fields("New flux", f, 'fluxes') %>
 <% end %>

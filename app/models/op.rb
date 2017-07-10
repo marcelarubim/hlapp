@@ -22,4 +22,6 @@ class Op < ApplicationRecord
   enum priority: [:normal, :urgente]
 
   accepts_nested_attributes_for :productions, reject_if: :all_blank
+  accepts_nested_attributes_for :fluxes, allow_destroy: true, reject_if: :all_blank
+
 end
