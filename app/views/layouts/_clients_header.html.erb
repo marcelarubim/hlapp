@@ -1,0 +1,22 @@
+<li class="nav-item <%= "active" if current_page?(clients_path) %>">
+  <a class="nav-link" href="<%= clients_path %>">clients</a>
+</li>
+<% if params[:action] == 'index' %>
+  <form class="form-inline">
+    <input class="form-control form-control-sm mr-sm-2" type="text" placeholder="search">
+    <button class="btn btn-sm btn-outline-secondary my-2 my-sm-0" type="submit">>></button>
+  </form>
+<% else %>
+  <li class="nav-item dropdown <%= "active" if current_page?(client_path(@client)) %>">
+    <a class="nav-link dropdown-toggle" href="<%= client_path(@client) %>" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= @client.business_name.truncate(18, omission: '..').downcase %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+      <a class="dropdown-item" href="#">contracts</a>
+      <a class="dropdown-item" href="#">op's</a>
+      <a class="dropdown-item" href="#">installations</a>
+      <a class="dropdown-item" href="#">ost's</a>
+    </div>
+  </li>
+
+<% end %>
