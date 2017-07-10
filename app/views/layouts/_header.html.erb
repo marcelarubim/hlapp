@@ -1,8 +1,10 @@
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
+  <a class="navbar-brand" href="<%= root_path %>">
+    <img src="<%= asset_path('logo.png') %>" alt="HL">
+  </a>
   <div class="collapse navbar-collapse" id="navbarHeader">
     <ul class="navbar-nav mr-auto mt-2 mt-md-0">
       <%= render 'layouts/shared_header' %>
