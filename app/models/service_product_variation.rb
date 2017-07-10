@@ -5,8 +5,9 @@ class ServiceProductVariation < ApplicationRecord
   belongs_to :variation_type, optional: true
 
   def display
-    "#{service_type.name.titleize} - #{product_type.name.titleize} -
-    #{variation_type.name.titleize}"
+    base = "#{service_type.name.titleize} - #{product_type.name.titleize}"
+    base += " - #{variation_type.name.titleize}" unless variation_type.nil?
+    base
   end
 
   def self.service_types
