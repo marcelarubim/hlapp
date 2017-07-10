@@ -1,5 +1,6 @@
 # .nodoc. #
 class ContractsController < ApplicationController
+  before_action :logged_in_user
   before_action :setup_contract, only: [:edit, :update, :destroy]
 
   def new

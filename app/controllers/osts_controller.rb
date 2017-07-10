@@ -1,5 +1,6 @@
 # .nodoc. #
 class OstsController < ApplicationController
+  before_action :logged_in_user
   before_action :setup_installation
   before_action :setup_ost, only: [:edit, :update, :destroy]
 

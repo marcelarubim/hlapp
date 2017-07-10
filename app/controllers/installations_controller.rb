@@ -1,5 +1,6 @@
 # .nodoc. #
 class InstallationsController < ApplicationController
+  before_action :logged_in_user
   before_action :setup_contract, only: [:index, :new, :create]
   before_action :setup_installation, only: [:edit, :update, :destroy]
 

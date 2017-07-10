@@ -1,5 +1,6 @@
 # .nodoc. #
 class ClientsController < ApplicationController
+  before_action :logged_in_user
   before_action :setup_client, only: [:edit, :update, :destroy]
 
   def index

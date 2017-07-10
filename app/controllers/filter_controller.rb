@@ -1,5 +1,6 @@
 # .nodoc. #
 class FilterController < ApplicationController
+  before_action :logged_in_user
   def client_categories
     selection = ClientCategory.where(sector: params[:sector])
                               .select(:id, :name).order(:name)
