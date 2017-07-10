@@ -70,4 +70,6 @@ Contract.all.each do |c|
   c.services.each do |serv|
     FactoryGirl.create_list(:production, rand(1..3), service: serv, op: c.ops.sample)
   end
+  FactoryGirl.create_list(:installation, c.tt_inst_contracted, :with_address,
+                          service: c.services.sample)
 end
