@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
+  resources :users, only: [:show, :edit, :update]
+
   resources :clients, except: [:show, :edit], shallow: true do
     resources :contracts, except: [:show, :edit] do
       resources :ops, except: [:show, :edit]
