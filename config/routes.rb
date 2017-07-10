@@ -27,4 +27,5 @@ Rails.application.routes.draw do
     get 'services/variations', to: 'filter#service_variations'
     get 'productions/op', to: 'filter#productions_available'
   end
+  get '/*param', to: redirect('/', status: 302)
 end
