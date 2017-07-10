@@ -21,4 +21,19 @@
       <%= link_to 'OSTs', osts_path(@installation), class:"nav-link"  %>
     <% end %>
   <% end %>
+
+  <% if logged_in? %>
+       <li class="nav-item <%= "active" if current_page?(user_path(current_user)) %>">
+         <a class="nav-link" href="<%= user_path(current_user) %>">menu</a>
+       </li>
+       <li class="nav-item <%= "active" if current_page?(user_path(current_user)) %>">
+         <a class="nav-link" href="<%= user_path(current_user) %>">mapa de produção</a>
+       </li>
+       <li class="nav-item <%= "active" if current_page?(user_path(current_user)) %>">
+         <a class="nav-link" href="<%= user_path(current_user) %>">mapa de OST</a>
+       </li>
+       <li class="nav-item">
+         <%= link_to "log out", logout_path, method: "delete", class: "nav-link" %>
+       </li>
+   <% end %>
 </nav>
