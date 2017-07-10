@@ -9,7 +9,7 @@ class Ost < ApplicationRecord
   accepts_nested_attributes_for :fluxes, allow_destroy: true, reject_if: :all_blank
 
   enum status: [:in_progress, :complete, :no_return]
-  enum type: [:implantacao, :loc_temporaria, :manutencao_troca_producao,
+  enum kind: [:implantacao, :loc_temporaria, :manutencao_troca_producao,
               :troca_equipamento, :edicao_holdcast, :migracao, :migracao_temporaria,
               :apoio_tecnico, :recolhimento, :cancelado]
   enum service_method: [:correio, :visita, :telefone, :web_servidor]

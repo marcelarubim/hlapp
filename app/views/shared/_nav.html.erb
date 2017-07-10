@@ -18,6 +18,7 @@
       <%= link_to 'New installation', new_contract_installation_path(@contract), class:"nav-link"  %>
     <% else %>
       <%= link_to 'Contract', contract_path(@installation.contract || @contract), class:"nav-link"  %>
+      <%= link_to 'OSTs', osts_path(@installation), class:"nav-link"  %>
     <% end %>
   <% end %>
 </nav>

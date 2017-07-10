@@ -73,3 +73,7 @@ Contract.all.each do |c|
   FactoryGirl.create_list(:installation, c.tt_inst_contracted, :with_address,
                           service: c.services.sample)
 end
+
+Installation.all.each do |i|
+  FactoryGirl.create_list(:ost, rand(0..4), :with_flux, installation: i)
+end

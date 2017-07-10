@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(version: 20170709115352) do
 
   create_table "osts", force: :cascade do |t|
     t.integer "status"
-    t.integer "type"
+    t.integer "kind"
     t.date "program_date"
     t.date "service_execution_date"
     t.date "qc_date"
