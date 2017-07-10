@@ -1,0 +1,19 @@
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarHeader">
+    <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+      <%= render 'layouts/shared_header' %>
+      <% if params[:controller] == 'users'%>
+        <%= render 'layouts/users_header' %>
+      <% end %>
+
+
+      <li class="nav-item <%= "active" if current_page?(contracts_path) %>">
+        <%= link_to_if(logged_in?, 'log out', logout_path, method: 'delete', class: 'nav-link'){} %>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -3,15 +3,7 @@
 <div class="row justify-content-md-center pt-3">
   <div class="container">
     <div class="btn-group-vertical" role="group" aria-label="">
-      <%= link_to 'Profile', edit_user_path, class:'btn btn-secondary', role:'button' %>
-      <% if  @user.role != 'new_user'%>
-        <%= link_to 'Clients', clients_path, class:'btn btn-secondary', role:'button' %>
-          <a href="#" class='btn btn-secondary' role='button'>Contracts</a>
-          <a href="#" class='btn btn-secondary' role='button'>Reports</a>
-          <a href="#" class='btn btn-secondary' role='button'>Categories</a>
-        <%= link_to_if(@user.role == 'admin', 'Users', { controller: "admin/users", action: "index" }, class:'btn btn-secondary', role:'button'){} %>
-         <%= link_to "Log out", logout_path, method: "delete", class: "btn btn-secondary", role: 'button'%>
-      <% end %>
+
     </div>
   </div>
 </div>
