@@ -6,15 +6,25 @@ module CustomFormHelper
   end
 
   def select_tag(name, option_tags = nil, options = {})
-    options[:class] = [options[:class] || '', 'form-control form-control-sm']
-                      .reject(&:empty?).join(' ')
-    super(name, option_tags, options)
+    super(name, option_tags, field_options(options))
   end
 
-  def label_tag(name = nil, content_or_options = nil, options = nil, &block)
-    options[:class] = [options[:class] || '',
-                       'col-form-label col-form-label-sm text-right']
+  def label_tag(name = nil, content_or_options = nil, options = {}, &block)
+    super(name, content_or_options, label_options(options), &block)
+  end
+
+  private
+
+  def field_options(options = {})
+    options[:class] = [options[:class] || '', 'form-control form-control-sm']
                       .reject(&:empty?).join(' ')
-    super(name, content_or_options, options, &block)
+    options
+  end
+
+  def label_options(options = {})
+    options[:class] = [options[:class] || '',
+                       'col-form-label col-form-label-sm text-right',
+                       options[:col] || 'col-sm-2'].reject(&:empty?).join(' ')
+    options
   end
 end

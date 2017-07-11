@@ -1,5 +1,6 @@
 # .nodoc. #
 class CustomFormBuilder < ActionView::Helpers::FormBuilder
+  include CustomFormHelper
   # delegate :capture, :content_tag, :tag, to: :@template
 
   def self.error_tagged(method_name)
@@ -40,36 +41,28 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
   def self.custom_literal_field(method_name)
     define_method(method_name) do |attribute, *args, &block|
       options = args.extract_options!
-      new_class = 'form-control form-control-sm ' + options[:class].to_s
-      col = options[:col] || 'col-sm-4'
-      @template.content_tag(:div, class: col) do
-        super(attribute, *(args << options.merge(class: new_class)), &block)
+      @template.content_tag(:div, class: options[:col] || 'col-sm-4') do
+        super(attribute, *(args << field_options(options)), &block)
       end
     end
   end
 
   def label(attribute, *args, &block)
-    options = args.extract_options!
-    new_class = [options[:class] || '',
-                 'col-form-label col-form-label-sm text-right',
-                 options[:col] || 'col-sm-2'].reject(&:empty?).join(' ')
-    super(attribute, *(args << options.merge(class: new_class)), &block)
+    super(attribute, *(args << label_options(args.extract_options!)), &block)
   end
 
   def collection_select(method, collection, value_method, text_method, options = {}, html_options = {})
-    html_options[:class] = [html_options[:class] || '', 'form-control form-control-sm']
-                           .reject(&:empty?).join(' ')
-    super(method, collection, value_method, text_method, options, html_options)
+    super(method, collection, value_method, text_method, options,
+          field_options(html_options))
   end
 
-  (field_helpers).each do |method_name|
+  field_helpers.each do |method_name|
     # error_tagged(method_name)
     if method_name.to_s == 'text_area' ||
        method_name.to_s.include?('_field')
       custom_literal_field(method_name)
     end
   end
-
 
   # def field_wrapper(attribute, args, &block)
   #   @template.content_tag(:div, { class: 'field', id: "field-#{attribute}" }) do
