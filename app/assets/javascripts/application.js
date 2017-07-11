@@ -13,6 +13,7 @@
 //= require jquery
 //= require rails-ujs
 //= require tether
+//= require popper
 //= require bootstrap
 //= require turbolinks
 //= require jquery-readyselector
@@ -28,3 +29,10 @@ $(document).on('turbolinks:load', function () {
     el.remove();
   });
 });
+
+$(function () {
+  $('[data-toggle^="tooltip-"]').on('mouseover click', function () {
+    $(this).tooltip();
+  });
+})
+

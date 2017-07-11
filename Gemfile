@@ -64,6 +64,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
 gem 'jquery-rails'
+gem 'popper_js', '~> 1.9.9'
+
 gem 'paper_trail'
 
 group :test do
