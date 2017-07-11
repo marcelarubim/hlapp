@@ -9,8 +9,9 @@
   </head>
 
   <body class="<%= controller_name %> <%= action_name %>">
-    <div id="flash_wrapper"><%= render 'layouts/messages' %></div>
     <%= render 'layouts/header' %>
+    <div id="flash_wrapper" ><%= render 'layouts/messages' %></div>
+    <div id="errors_wrapper"></div>
     <%= yield %>
   </body>
 </html>
