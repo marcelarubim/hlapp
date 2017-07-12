@@ -10,7 +10,7 @@ module CustomFormHelper
   end
 
   def label_tag(name = nil, content_or_options = nil, options = {}, &block)
-    super(name, content_or_options, label_options(options), &block)
+    super(name, content_or_options, label_options(options, 'col-sm-2 text-right'), &block)
   end
 
   private
@@ -21,10 +21,11 @@ module CustomFormHelper
     options
   end
 
-  def label_options(options = {})
+  def label_options(options = {}, optional = '')
     options[:class] = [options[:class] || '',
-                       'col-form-label col-form-label-sm text-right',
-                       options[:col] || 'col-sm-2'].reject(&:empty?).join(' ')
+                       'col-form-label col-form-label-sm',
+                       optional]
+                      .reject(&:empty?).join(' ')
     options
   end
 end
