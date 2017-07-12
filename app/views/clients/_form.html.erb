@@ -35,7 +35,7 @@
       <%= label_tag 'client_category_sector', 'Sector:'%>
       <div class="col-sm-4"><%= select_tag "client_category_sector", options_from_collection_for_select(ClientCategory.all.select(:sector).distinct.order(:sector), "sector", "sector", selected: @client.category&.sector), include_blank: true %></div>
       <%= f.label :category_id, 'Category:' %>
-      <div class="col-sm-4"><%= f.collection_select :category_id, @client.new_record? ? ClientCategory.all.select(:id, :name) : [@client.category], :id, :name, {include_blank: true}, selected: @client.category&.name %></div>
+      <%= f.collection_select :category_id, @client.new_record? ? ClientCategory.all.select(:id, :name) : [@client.category], :id, :name, {include_blank: true}, selected: @client.category&.name %>
     </div>
     <fieldset id="category_attributes" disabled>
       <div class="form-group row">
@@ -61,11 +61,11 @@
 
     <div class="form-group row">
       <%= f.label :seller_id, 'Seller:' %>
-      <div class="col-sm-2"><%= f.collection_select :seller_id, User.all, :id, :fullname, selected: @client.seller&.id, include_blank: true %></div>
+      <%= f.collection_select :seller_id, User.all, :id, :fullname, selected: @client.seller&.id, col: 'col-sm-2', include_blank: true %>
       <%= f.label :captured_by_id, 'Captured by:' %>
-      <div class="col-sm-2"><%= f.collection_select :captured_by_id, User.all, :id, :fullname, selected: @client.captured_by&.id, include_blank: true %></div>
+      <%= f.collection_select :captured_by_id, User.all, :id, :fullname, selected: @client.captured_by&.id, col: 'col-sm-2', include_blank: true %>
       <%= f.label :telemarketing_id, 'Telemarketing:' %>
-      <div class="col-sm-2"><%= f.collection_select :telemarketing_id, User.all, :id, :fullname, selected: @client.telemarketing&.id, include_blank: true %></div>
+      <%= f.collection_select :telemarketing_id, User.all, :id, :fullname, selected: @client.telemarketing&.id, col: 'col-sm-2', include_blank: true %>
     </div>
 
     <% unless @client.new_record? %>

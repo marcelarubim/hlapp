@@ -19,8 +19,11 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def collection_select(method, collection, value_method, text_method, options = {}, html_options = {})
-    super(method, collection, value_method, text_method, options,
-          field_options(html_options))
+    puts options
+    @template.content_tag(:div, class: options[:col] || 'col-sm-4') do
+      super(method, collection, value_method, text_method, options,
+            field_options(options))
+    end
   end
 
   field_helpers.each do |method_name|
