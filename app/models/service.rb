@@ -23,4 +23,8 @@ class Service < ApplicationRecord
   def product_type
     spv&.product_type_id
   end
+
+  def product_variation
+    spv&.product_type&.name.to_s + spv&.variation_type&.name.to_s
+  end
 end

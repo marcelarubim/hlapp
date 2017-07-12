@@ -1,5 +1,24 @@
-<%= f.fields_for :contracts, @client.contracts do |ff|%>
-  <div class="card" id="object-contract-<%= ff.object.id || "new" %>">
-    <%= render partial: 'shared/colapse_header', locals: {ff: ff, id: ff.object.id || "new", class_name: 'contract' } %>
-  </div>
-<% end %>
+<table class="table table-hover table-sm">
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Date</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+    <tbody>
+      <%= f.fields_for :contracts, @client.contracts do |ff|%>
+        <tr role="button" id="object-contract-<%= ff.object.id %>" data-href="<%= contract_path(ff.object.id) %>">
+          <td><%= ff.object.category %></td>
+          <td><%= ff.object.date %></td>
+          <td><%= ff.object.status %></td>
+          <td>
+            <%= link_to destroy_object_path(ff.object.class.name.downcase, ff.object.id), remote: true, method: :delete, data: { confirm: "Are you sure?" } do %>
+            <button class="btn btn-danger btn-sm object_delete">x</button>
+          <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
