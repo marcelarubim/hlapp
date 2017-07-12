@@ -1,4 +1,4 @@
-<%= custom_form_for @client, html: {class: 'custom-form'} do |f| %>
+<%= custom_form_for @client do |f| %>
   <%= render partial: 'shared/form_errors', formats: [:js], locals: { object: @client } %>
 
     <div class="form-group row">
