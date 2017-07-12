@@ -28,11 +28,20 @@ $(document).on('turbolinks:load', function () {
     const el = document.querySelector(`#object-${className}-${id}`);
     el.remove();
   });
+
+  $(function(){
+    $(".table").on("click", "tr[role=\"button\"]", function (e) {
+      ok_to_propagate = ! $(e.target).hasClass('object_delete');
+      if (ok_to_propagate) {
+        window.location = $(this).data("href")
+      }
+
+      // if (e.target == this) {
+      //   window.location = $(this).data("href");
+      // }
+    });
+  });
 });
 
-$(function () {
-  $('[data-toggle^="tooltip-"]').on('mouseover click', function () {
-    $(this).tooltip();
-  });
-})
+
 
