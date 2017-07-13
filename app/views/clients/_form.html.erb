@@ -69,13 +69,14 @@
     </div>
 
     <% unless @client.new_record? %>
-    <div class="row">
-      <div class="mt-3 col-12">Contracts:</div>
-      <div id="contract-container" class="col-sm-12">
-        <%= render partial: "contracts", locals: {f: f} %>
+      <div class="row">
+        <div id="contract-container" class="col-sm-12">
+          <%= render partial: "contracts", locals: {f: f} %>
+        </div>
+        <div class="col-sm-12">
+          <%= link_to "New contract", new_client_contract_path(@client)%>
+        </div>
       </div>
-    </div>
-      <%= link_to "New contract", new_client_contract_path(@client)%>
     <% end %>
 
     <div class="row">

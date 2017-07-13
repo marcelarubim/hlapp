@@ -1,19 +1,23 @@
-<table class="table table-hover table-sm">
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>Date</th>
-      <th>Status</th>
-      <th></th>
-    </tr>
-  </thead>
+<div class="row bg-inverse text-white" data-toggle="collapse" data-target="<%= '#collapseContracts' unless @client.contracts.empty? %>" aria-expanded="false" aria-controls="collapseContracts">
+  <div class="col-12"><h4 role="button">Contracts</h4></div>
+</div>
+<div class="collapse" id="collapseContracts">
+  <table class="table table-hover table-sm">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
     <tbody>
       <%= f.fields_for :contracts, @client.contracts do |ff|%>
         <tr role="button" id="object-contract-<%= ff.object.id %>" data-href="<%= contract_path(ff.object.id) %>">
           <td><%= ff.object.category %></td>
           <td><%= ff.object.date %></td>
           <td><%= ff.object.status %></td>
-          <td>
+          <td class="text-right">
             <%= link_to destroy_object_path(ff.object.class.name.downcase, ff.object.id), remote: true, method: :delete, data: { confirm: "Are you sure?" } do %>
             <button class="btn btn-danger btn-sm object_delete">x</button>
           <% end %>
@@ -22,3 +26,4 @@
       <% end %>
     </tbody>
   </table>
+</div>
