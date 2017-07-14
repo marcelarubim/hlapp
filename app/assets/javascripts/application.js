@@ -35,10 +35,6 @@ $(document).on('turbolinks:load', function () {
       if (ok_to_propagate) {
         window.location = $(this).data("href")
       }
-
-      // if (e.target == this) {
-      //   window.location = $(this).data("href");
-      // }
     });
   });
 });
