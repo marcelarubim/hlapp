@@ -1,0 +1,17 @@
+<div data-toggle="collapse" data-target="<%= '#collapseContacts' %>" aria-expanded="false" aria-controls="collapseContacts">
+  <h4 role="button">Contacts</h4>
+</div>
+<div class="collapse" id="collapseContacts">
+  <table class="table table-hover table-sm">
+    <thead>
+    </thead>
+    <tbody id="contact-container">
+      <%= f.fields_for :contacts, @client.contacts do |ff|%>
+        <%= render partial: 'contacts', locals: {ff: ff} %>
+      <% end %>
+    </tbody>
+  </table>
+  <div>
+    <%= link_to_add_fields("New contact", f, 'contacts') %>
+  </div>
+</div>
