@@ -27,7 +27,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
 
   def select(method, choices, options = {}, html_options = {})
     @template.content_tag(:div, class: options[:col] || 'col-sm-4') do
-      super(method, choices, options, html_options)
+      super(method, choices, options, field_options(html_options))
     end
   end
 
