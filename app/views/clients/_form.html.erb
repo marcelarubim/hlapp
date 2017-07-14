@@ -68,26 +68,16 @@
       <%= f.collection_select :telemarketing_id, User.all, :id, :fullname, selected: @client.telemarketing&.id, col: 'col-sm-2', include_blank: true %>
     </div>
 
-    <% unless @client.new_record? %>
-      <div class="row">
-        <div id="contract-container" class="col-sm-12">
-          <%= render partial: "contracts", locals: {f: f} %>
-        </div>
-        <div class="col-sm-12">
-          <%= link_to "New contract", new_client_contract_path(@client)%>
-        </div>
-      </div>
-    <% end %>
-
-    <div class="row">
-      <p class="mt-3">Addresses:</p>
-      <div id="address-container">
-        <%= f.fields_for :addresses, @client.addresses do |ff| %>
-          <%= render partial: "addresses", locals: {ff: ff} %>
+    <table class="table table-hover table-sm">
+      <tbody>
+        <% unless @client.new_record? %>
+        <tr>
+          <td><%= render partial: "contracts", locals: {f: f} %></td>
+        </tr>
         <% end %>
-      </div>
-      <%= link_to_add_fields("New address", f, 'addresses') %>
-    </div>
+      </tbody>
+    </table>
+
 
     <p class="mt-3">Contacts:</p>
     <div id="contact-container">
