@@ -1,56 +1,18 @@
-<tr id="object-address-<%= @id || ff.object.id %>" data-toggle="collapse" data-target=".collapseAddresses-<%= @id || ff.object.id %>">
-  <td>
-    <% if ff.object.persisted? %>
-      <label class="btn-sm">
-        <%= ff.check_box :_destroy %>
-      </label>
-    <% end %>
-  </td>
-  <td><%= ff.object.persisted? ? ff.object.display : 'new address' %></td>
-  <td class="text-right">
-    <% if ff.object.new_record? %>
-        <%= button_tag "x", type: "button", remote: true, class:"btn btn-danger btn-sm", id: "remove-new-object", "data-id": @id, "data-type": 'address' %>
-    <% elsif ff.object.persisted? %>
-      <%= link_to destroy_object_path(ff.object.class.name.downcase, ff.object.id), remote: true, method: :delete, data: { confirm: "Are you sure?" } do %>
-      <button class="btn btn-danger btn-sm object_delete">x</button>
-    <% end %>
-  <% end %>
-  </td>
-</tr>
-<tr class="collapse collapseAddresses-<%= @id || ff.object.id %> <%= 'show' if ff.object.new_record? %> ">
-  <td colspan="3">
-    <div class="card">
-      <div class="card-block">
-        <div class="form-group row">
-          <%= ff.label :address, 'Address:' %>
-          <%= ff.text_field :address, placeholder: 'address', col: 'col-sm-10' %>
-        </div>
-        <div class="form-group row">
-          <%= ff.label :num, 'Num:' %>
-          <%= ff.text_field :num, placeholder: 'num' %>
-          <%= ff.label :complement, 'Complement:' %>
-          <%= ff.text_field :complement, placeholder: 'complement' %>
-        </div>
-        <div class="form-group row">
-          <%= ff.label :district, 'District:' %>
-          <%= ff.text_field :district, placeholder: 'district' %>
-          <%= ff.label :city, 'City:' %>
-          <%= ff.text_field :city, placeholder: 'city' %>
-        </div>
-        <div class="form-group row">
-          <%= ff.label :state, 'State:' %>
-          <%= ff.text_field :state, placeholder: 'state' %>
-          <%= ff.label :country, 'Country:' %>
-          <%= ff.text_field :country, placeholder: 'country' %>
-        </div>
-        <div class="form-group row">
-          <%= ff.label :zip_code, 'Zip Code:' %>
-          <%= ff.text_field :zip_code, placeholder: 'zip code' %>
-        </div>
-      </div>
-    </div>
-  </td>
-</tr>
-
-
+<div role="button" data-toggle="collapse" data-target="<%= '#collapseAddresses' %>" aria-expanded="false" aria-controls="collapseAddresses">
+  <h4 role="button">Addresses</h4>
+</div>
+<div class="collapse" id="collapseAddresses">
+  <table class="table table-hover table-sm">
+    <thead>
+    </thead>
+    <tbody id="address-container">
+      <%= f.fields_for :addresses, @client.addresses do |ff|%>
+        <%= render partial: 'address', locals: {ff: ff} %>
+      <% end %>
+    </tbody>
+  </table>
+  <div>
+    <%= link_to_add_fields("New address", f, 'addresses') %>
+  </div>
+</div>
 
