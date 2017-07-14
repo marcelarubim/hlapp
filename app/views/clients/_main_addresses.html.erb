@@ -1,0 +1,18 @@
+<div role="button" data-toggle="collapse" data-target="<%= '#collapseAddresses' %>" aria-expanded="false" aria-controls="collapseAddresses">
+  <h4 role="button">Addresses</h4>
+</div>
+<div class="collapse" id="collapseAddresses">
+  <table class="table table-hover table-sm">
+    <thead>
+    </thead>
+    <tbody id="address-container">
+      <%= f.fields_for :addresses, @client.addresses do |ff|%>
+        <%= render partial: 'addresses', locals: {ff: ff} %>
+      <% end %>
+    </tbody>
+  </table>
+  <div>
+    <%= link_to_add_fields("New address", f, 'addresses') %>
+  </div>
+</div>
+
