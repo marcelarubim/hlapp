@@ -25,6 +25,12 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  def select(method, choices, options = {}, html_options = {})
+    @template.content_tag(:div, class: options[:col] || 'col-sm-4') do
+      super(method, choices, options, html_options)
+    end
+  end
+
   field_helpers.each do |method_name|
     if method_name.to_s == 'text_area' ||
        method_name.to_s.include?('_field')
