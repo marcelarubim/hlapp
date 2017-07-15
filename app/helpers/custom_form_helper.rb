@@ -18,6 +18,7 @@ module CustomFormHelper
   def field_options(options = {})
     options[:class] = [options[:class] || '', 'form-control form-control-sm']
                       .reject(&:empty?).join(' ')
+    options.delete(:col)
     options
   end
 
@@ -26,6 +27,7 @@ module CustomFormHelper
                        'col-form-label col-form-label-sm',
                        optional]
                       .reject(&:empty?).join(' ')
+    options.delete(:col)
     options
   end
 end
