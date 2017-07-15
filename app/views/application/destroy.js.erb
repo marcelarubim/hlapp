@@ -2,8 +2,14 @@
   const id = "<%= params[:id] %>";
   const className = "<%= params[:class_name].downcase %>";
   const el = document.querySelector(`#object-${className}-${id}`);
+  const target = document.querySelector(`${el.dataset.target}`);
   const input = document.querySelector(`div[id|="${className}-container"] input[type="hidden"][value="${id}"][name*=${className}]`);
-  input.remove();
+  if (input != undefined || null){
+    input.remove();
+  }
+  if (target != undefined || null){
+    target.remove();
+  }
   el.remove();
   $('#flash_wrapper').html("<%= escape_javascript(render 'layouts/messages') %>");
 })();
