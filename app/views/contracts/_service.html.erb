@@ -1,0 +1,56 @@
+<tr id="object-service-<%= @id || ff.object.id %>" data-toggle="collapse" data-target=".collapseServices-<%= @id || ff.object.id %>">
+  <td>
+    <% if ff.object.persisted? %>
+      <label class="btn-sm">
+        <%= ff.check_box :_destroy %>
+      </label>
+    <% end %>
+  </td>
+  <td><%= ff.object.persisted? ? ff.object.display : 'new service' %></td>
+  <td class="text-right">
+    <% if ff.object.new_record? %>
+        <%= button_tag "x", type: "button", remote: true, class:"btn btn-danger btn-sm", id: "remove-new-object", "data-id": @id, "data-type": 'service' %>
+    <% elsif ff.object.persisted? %>
+      <%= link_to destroy_object_path(ff.object.class.name.downcase, ff.object.id), remote: true, method: :delete, data: { confirm: "Are you sure?" } do %>
+      <button class="btn btn-danger btn-sm object_delete">x</button>
+    <% end %>
+  <% end %>
+  </td>
+</tr>
+<tr class="collapse collapseServices-<%= @id || ff.object.id %> <%= 'show' if ff.object.new_record? %> ">
+  <td colspan="3">
+    <div class="card">
+      <div class="card-block">
+        <div class="form-group row">
+          <%= label_tag "service-type-#{@id || ff.object.id}", 'Service:' %>
+          <div class="col-sm-2">
+            <%= select_tag "service-type-#{@id || ff.object.id}", options_from_collection_for_select(ServiceProductVariation.service_types, "id", "name", selected: ff.object&.service_type), "data-id": ff.object.new_record? ? @id : ff.object.id, "data-type": "service", "data-target": "product", include_blank: true %>
+          </div>
+          <%= label_tag "product-type-#{@id || ff.object.id}", 'Product:' %>
+          <div class="col-sm-2">
+            <%= select_tag "product-type-#{ff.object.new_record? ? @id : ff.object.id}", options_from_collection_for_select(ProductType.all, "id", "name", selected: ff.object&.product_type), "data-id": @id || ff.object.id, "data-type": "product", "data-target": "variation", include_blank: true, col: 'col-sm-2' %>
+          </div>
+          <%= ff.label :service_product_variation_id, 'Variation:' %>
+          <%= ff.collection_select :service_product_variation_id, ServiceProductVariation.all, :id, :id, { include_blank: true }, { "data-id": @id || ff.object.id, "data-type": "variation", col: 'col-sm-2' } %>
+        </div>
+        <div class="card-block">
+          <div data-toggle="collapse" data-target="#collapseProductions-<%= @id || ff.object.id %>" aria-expanded="false" aria-controls="collapseProductions">
+            <h5 role="button">Productions</h5>
+          </div>
+          <div class="collapse" id="collapseProductions-<%= @id || ff.object.id %>">
+            <table class="table table-hover table-sm">
+              <tbody id="production-container-<%= @id || ff.object.id %>">
+                <%= ff.fields_for :productions, ff.object.productions do |fff|%>
+                  <%= render partial: 'production', locals: {ff: fff} %>
+                <% end %>
+              </tbody>
+            </table>
+            <div>
+              <%= link_to_add_fields("New production", ff, 'productions', 'contracts/production', {target: "production-container-#{@id || ff.object.id}"}) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </td>
+</tr>

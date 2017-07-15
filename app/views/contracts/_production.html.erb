@@ -1,25 +1,39 @@
-<div class="card-block" id="object-production-<%= @id || ff.object.id %>">
-  <% if ff.object.persisted? %>
-    <label class="btn btn-danger">
-      <%= ff.check_box :_destroy %>
-    </label>
-    <%= link_to destroy_object_path(ff.object.class.name.downcase, ff.object.id), remote: true, method: :delete, data: { confirm: "Are you sure?" } do %>
-      <button class="btn btn-danger btn-sm">Delete!</button>
+<tr id="object-production-<%= @id || ff.object.id %>" data-toggle="collapse" data-target=".collapseProductions-<%= @id || ff.object.id %>">
+  <td>
+    <% if ff.object.persisted? %>
+      <label class="btn-sm">
+        <%= ff.check_box :_destroy %>
+      </label>
     <% end %>
-  <% else  %>
-    <%= button_tag "x", type: "button", remote: true, class:"btn btn-danger", id: "remove-new-object", "data-id": @id, "data-type": 'production' %>
+  </td>
+  <td><%= ff.object.persisted? ? ff.object.display : 'new production' %></td>
+  <td class="text-right">
+    <% if ff.object.new_record? %>
+        <%= button_tag "x", type: "button", remote: true, class:"btn btn-danger btn-sm", id: "remove-new-object", "data-id": @id, "data-type": 'production' %>
+    <% elsif ff.object.persisted? %>
+      <%= link_to destroy_object_path(ff.object.class.name.downcase, ff.object.id), remote: true, method: :delete, data: { confirm: "Are you sure?" } do %>
+      <button class="btn btn-danger btn-sm object_delete">x</button>
+    <% end %>
   <% end %>
-
-  <div class="form-group row">
-    <label class="col-sm-2" for="">Theme: </label>
-    <div class="col-sm-4"><%= ff.text_field :theme, placeholder: ff.object.theme %></div>
-    <label class="col-sm-2" for="">Details: </label>
-    <div class="col-sm-4"><%= ff.text_area :details, placeholder: ff.object.details %></div>
-  </div>
-  <div class="form-group row">
-    <label class="col-sm-2" for="">Airing month: </label>
-    <div class="col-sm-4"><%= ff.month_field :airing_month, value: ff.object.airing_month%></div>
-    <label class="col-sm-2" for="">Renew forecast month: </label>
-    <div class="col-sm-4"><%= ff.month_field :renew_forecast_month, value: ff.object.renew_forecast_month%></div>
-  </div>
-</div>
+  </td>
+</tr>
+<tr class="collapse collapseProductions-<%= @id || ff.object.id %> <%= 'show' if ff.object.new_record? %> ">
+  <td colspan="3">
+    <div class="card">
+      <div class="card-block">
+        <div class="form-group row">
+          <%= ff.label :theme, 'Theme:' %>
+          <%= ff.text_field :theme, placeholder: ff.object.theme %>
+          <%= ff.label :details, 'Details:' %>
+          <%= ff.text_area :details, placeholder: ff.object.details %>
+        </div>
+        <div class="form-group row">
+          <%= ff.label :month_field, 'Airing month:' %>
+          <%= ff.month_field :airing_month, value: ff.object.airing_month, 'asp-format':"{0:yyyy-MM}" %>
+          <%= ff.label :renew_forecast_month, 'Renew forecast month:' %>
+          <%= ff.month_field :renew_forecast_month, value: ff.object.renew_forecast_month, 'asp-format':"{0:yyyy-MM}" %>
+        </div>
+      </div>
+    </div>
+  </td>
+</tr>

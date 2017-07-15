@@ -7,4 +7,8 @@ class Production < ApplicationRecord
   scope :with_op, -> { where.not(op_id: nil) }
   scope :without_op, -> { where(op_id: nil) }
   scope :available, ->(op_id) { where(op_id: [nil, op_id]) }
+
+  def display
+    "#{theme} - #{airing_month}"
+  end
 end

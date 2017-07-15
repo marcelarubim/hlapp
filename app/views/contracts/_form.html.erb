@@ -37,14 +37,14 @@
     <%= f.label :tt_inst_contracted, 'TT Instal. Contracted:' %>
     <%= f.number_field :tt_inst_contracted, placeholder: @contract.tt_inst_contracted %>
   </div>
-  <p class="mt-3">Services:</p>
-  <div id="service-container">
-    <%= f.fields_for :services, @contract.services do |ff| %>
-      <%= render partial: "services", locals: {ff: ff} %>
-    <% end %>
-  </div>
-  <%= link_to_add_fields("New services", f, 'services') %>
 
-  <div class="mt-3"></div>
+  <table class="table table-hover table-sm">
+    <tbody>
+      <tr>
+        <td><%= render partial: "services", locals: {f: f} %></td>
+      </tr>
+    </tbody>
+  </table>
+
   <%= f.submit 'Save', class: 'btn btn-secondary' %>
 <% end %>
