@@ -1,4 +1,4 @@
-<div role="button" data-toggle="collapse" data-target="<%= '#collapseAddresses' %>" aria-expanded="false" aria-controls="collapseAddresses">
+<div data-toggle="collapse" data-target="<%= '#collapseAddresses' %>" aria-expanded="false" aria-controls="collapseAddresses">
   <h4 role="button">Addresses</h4>
 </div>
 <div class="collapse" id="collapseAddresses">
@@ -12,7 +12,6 @@
     </tbody>
   </table>
   <div>
-    <%= link_to_add_fields("New address", f, 'addresses') %>
+    <%= link_to_add_fields("New address", f, 'addresses', 'clients/address') %>
   </div>
 </div>
-
