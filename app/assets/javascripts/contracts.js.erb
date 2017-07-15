@@ -20,9 +20,15 @@ $(document).on('turbolinks:load', function () {
 
       if (url) {
         $.get(url, function (data) {
-          $(nextSelect).html(data.map(({ id, name }) =>
-            `<option value="${id}">${name}</option>`
-          ).join(''));
+          $(nextSelect).html(data.map(({ id, name }) => {
+            if (id == nextSelect.value) {
+              return `<option value="${id}" selected="selected">${name}</option>`;
+            }
+            else {
+              return `<option value="${id}">${name}</option>`;
+            }
+
+          }).join(''));
 
           loadSPVFilter(nextSelect);
         });
