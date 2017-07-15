@@ -3,7 +3,8 @@
   const className = "<%= params[:class_name].downcase %>";
   const el = document.querySelector(`#object-${className}-${id}`);
   const target = document.querySelector(`${el.dataset.target}`);
-  const input = document.querySelector(`div[id|="${className}-container"] input[type="hidden"][value="${id}"][name*=${className}]`);
+  const input = document.querySelector(`input[type="hidden"][value="${id}"][name*=${className}]`).parentElement;
+  console.log(input);
   if (input != undefined || null){
     input.remove();
   }
