@@ -14,4 +14,15 @@ class Client < ApplicationRecord
                                 allow_destroy: true, reject_if: :all_blank
 
   validates_presence_of :business_name, :legal_name, :cnpj
+
+  def self.search(query)
+    if query.nil? || query.empty?
+      nil
+    elsif query.start_with? 'cnpj:'
+      cnpj = query.split(':', 2).at(1)
+      where('cnpj LIKE ?', "#{cnpj}%")
+    else
+      where('business_name LIKE ?', "%#{query}%")
+    end
+  end
 end

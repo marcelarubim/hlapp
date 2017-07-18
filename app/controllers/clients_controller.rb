@@ -4,7 +4,11 @@ class ClientsController < ApplicationController
   before_action :setup_client, only: [:edit, :update, :destroy]
 
   def index
-    @clients = Client.all
+    @clients = Client.search(params[:query])
+    flash.now[:info] = 'Any client found' if @clients&.empty? ||
+                                             @clients.nil? && params[:query]&.empty?
+    @clients = Client.all if @clients.blank? # admin? &&
+    # @clients = Client.all
   end
 
   def new
