@@ -17,5 +17,7 @@ module Hlapp
     Dotenv::Railtie.load if Rails.env.development? || Rails.env.test?
 
     config.autoload_paths << Rails.root.join('lib')
+
+    config.action_controller.forgery_protection_origin_check = true
   end
 end
